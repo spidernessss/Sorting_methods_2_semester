@@ -282,7 +282,7 @@ int main(void)
 
 
     create_back_sorted_array(size, array1);
-    print_array(size, array3, 'd');
+    print_array(size, array1, 'd');
     // а вот тут уже придётся поменять местами все элементы,
     // из курса линейной алгебры помню, что для того,
     // чтобы из натуральной перестановки сделать обратную
