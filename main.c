@@ -60,26 +60,42 @@ void create_random_el_array(int size, int* array)
       // 1) array[i] = rand();
       // 2) rand() % (max + 1 - min) + min;
       // для генерации чисел из диапазона [min, max]
-      // ! для удобства возьму диапазон [-100, 100]
+      // ! для удобства возьму диапазон [-100_000, 100_000]
       // array[i] = rand() % 101;
       // 3) лучший метод генерации:
       // min + rand() / (RAND_MAX / (max - min + 1) + 1);
-       array[i] = -100 + rand() / (RAND_MAX / 202);
+       array[i] = -100000 + rand() / (RAND_MAX / 200002);
     }
 }
 // функции сравнения двух целых чисел для библиотечной qsort
 int cmp_for_qsort_ascending(const void* a, const void* b)
 {
-    int dereferenced_a = *((const int*) a);
-    int dereferenced_b = *((const int*) b);
-    return dereferenced_a - dereferenced_b;
+    int dereferenced_a = *((const long long*) a);
+    int dereferenced_b = *((const long long*) b);
+    if (dereferenced_a - dereferenced_b > 0)
+    {
+        return 1;
+    }
+    if (dereferenced_a - dereferenced_b < 0)
+    {
+        return -1;
+    }
+    return 0;
 }
 
 int cmp_for_qsort_descending(const void* a, const void* b)
 {
-    int dereferenced_a = *((const int*) a);
-    int dereferenced_b = *((const int*) b);
-    return dereferenced_b - dereferenced_a;
+    int dereferenced_a = *((const long long*) a);
+    int dereferenced_b = *((const long long*) b);
+    if (dereferenced_a - dereferenced_b > 0)
+    {
+        return -1;
+    }
+    if (dereferenced_a - dereferenced_b < 0)
+    {
+        return 1;
+    }
+    return 0;
 }
 // неубывание (т.е. след больше или равен предыдущему)
 void create_sorted_array(int size, int* array)
