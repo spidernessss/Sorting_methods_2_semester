@@ -3,7 +3,6 @@
 // случайных чисел
 #include <stdlib.h>
 #include <time.h>
-// #include <string.h>
 
 // для вычисления среднего значения количества
 // перестановок и сравнений для 4-х сортировок массивов
@@ -265,40 +264,62 @@ int main(void)
 
     }while (get_size_input != 'n');
 
-    int* array1 = malloc(size * sizeof(int));
-    int* array2 = malloc(size * sizeof(int));
-    int* array3 = malloc(size * sizeof(int));
-    int* array4 = malloc(size * sizeof(int));
+    int* array1_b = malloc(size * sizeof(int));
+    int* array1_q = malloc(size * sizeof(int));
+    int* array2_b = malloc(size * sizeof(int));
+    int* array2_q = malloc(size * sizeof(int));
+    int* array3_b = malloc(size * sizeof(int));
+    int* array3_q = malloc(size * sizeof(int));
+    int* array4_b = malloc(size * sizeof(int));
+    int* array4_q = malloc(size * sizeof(int));
     // Тест на корректность функций генерации массива:
     // srand долен быть здесь!!!
 
     // ТЕСТЫ!!!
 
 
-    // Bubble sort
     srand(time(NULL));
-    create_random_el_array(size, array3);
-    print_array(size, array3, 'r');
-    bubble_sort_and_print(size, array3);
+    create_random_el_array(size, array3_b);
+    for (int i = 0; i < size; i++)
+    {
+        *(array3_q + i) = *(array3_b + i);
+    }
+    print_array(size, array3_b, 'r');
+    bubble_sort_and_print(size, array3_b);
+    quick_sort_and_print(size, array3_q);
 
 
-    create_random_el_array(size, array4);
-    print_array(size, array4, 'r');
-    bubble_sort_and_print(size, array4);
+    create_random_el_array(size, array4_b);
+    for (int i = 0; i < size; i++)
+    {
+        *(array4_q + i) = *(array4_b + i);
+    }
+    print_array(size, array4_b, 'r');
+    bubble_sort_and_print(size, array4_b);
+    quick_sort_and_print(size, array4_q);
 
 
-    create_sorted_array(size, array2);
-    print_array(size, array2, 'a');
+    create_sorted_array(size, array2_b);
+    for (int i = 0; i < size; i++)
+    {
+        *(array2_q + i) = *(array2_b + i);
+    }
+    print_array(size, array2_b, 'a');
     // bubble_sort - устойчивый алгоритм, т.е.
     // если массив уже отсортирован, то он останется отсортированным,
     // при этом он закончит работу после первого шага сортировки
     // т.е.количество сравнений - array_size - 1
     // количество перестановок - 0
-    bubble_sort_and_print(size, array2);
+    bubble_sort_and_print(size, array2_b);
+    quick_sort_and_print(size, array2_q);
 
 
-    create_back_sorted_array(size, array1);
-    print_array(size, array1, 'd');
+    create_back_sorted_array(size, array1_b);
+    for (int i = 0; i < size; i++)
+    {
+        *(array1_q + i) = *(array1_b + i);
+    }
+    print_array(size, array1_b, 'd');
     // а вот тут уже придётся поменять местами все элементы,
     // из курса линейной алгебры помню, что для того,
     // чтобы из натуральной перестановки сделать обратную
@@ -307,47 +328,22 @@ int main(void)
     // количество сравнений будет n(n-1)/2
     // количество перестановок <= n(n-1)/2
     // т.к. могут быть одинаковые элементы, а их я не меняю
-    bubble_sort_and_print(size, array1);
+    bubble_sort_and_print(size, array1_b);
+    quick_sort_and_print(size, array1_q);
 
     //округление вниз
-    printf("Average number of swaps for 4 sorted arrays: %d\n", b_swaps/4);
-    printf("Average number of comparisons for 4 sorted arrays: %d\n", b_comparisons/4);
+    printf("Average number of swaps for 4 bubble-sorted arrays: %d\n", b_swaps/4);
+    printf("Average number of comparisons for 4 bubble-sorted arrays: %d\n", b_comparisons/4);
 
-
-    // Quick sort
-
-    create_random_el_array(size, array3);
-    print_array(size, array3, 'r');
-    quick_sort_and_print(size, array3);
-
-    create_random_el_array(size, array4);
-    print_array(size, array4, 'r');
-    quick_sort_and_print(size, array4);
-
-
-    create_sorted_array(size, array2);
-    print_array(size, array2, 'a');
-    quick_sort_and_print(size, array2);
-
-
-    create_back_sorted_array(size, array1);
-    print_array(size, array1, 'd');
-    quick_sort_and_print(size, array1);
-/*
-    int* array5 = malloc(sizeof(int) * 9);
-    memcpy(array5, (int[]){10, 16, 8, 12, 15, 6, 3, 9, 5}, 9 * sizeof(int));
-    quick_sort_and_print(9, array5);
-*/
     //округление вниз
-    printf("Average number of swaps for 4 sorted arrays: %d\n", q_swaps_sum / 4);
-    printf("Average number of comparisons for 4 sorted arrays: %d\n", q_comparisons_sum / 4);
+    printf("Average number of swaps for 4 quick-sorted arrays: %d\n", q_swaps_sum / 4);
+    printf("Average number of comparisons for 4 quick-sorted arrays: %d\n", q_comparisons_sum / 4);
 
 
-    free(array1);
-    free(array2);
-    free(array3);
-    free(array4);
-  //  free(array5);
+    free(array1_b);
+    free(array2_b);
+    free(array3_b);
+    free(array4_b);
 
     return 0;
 }
