@@ -256,12 +256,16 @@ int main(void)
             // без пробела scanf считает \n из предыдущей команды printf
             // и запишет его в get_size_input
             scanf(" %c", &get_size_input);
+            if (get_size_input == 'n')
+            {
+                exit(0);
+            }
         }
         else
         {
             get_size_input = 'n';
         }
-
+        
     }while (get_size_input != 'n');
 
     int* array1_b = malloc(size * sizeof(int));
