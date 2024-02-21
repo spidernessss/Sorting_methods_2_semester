@@ -348,6 +348,10 @@ int main(void)
     free(array2_b);
     free(array3_b);
     free(array4_b);
+    free(array1_q);
+    free(array2_q);
+    free(array3_q);
+    free(array4_q);
 
     return 0;
 }
